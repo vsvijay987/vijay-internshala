@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Dragula from "react-dragula";
 import {
   FormGroup,
@@ -19,11 +19,13 @@ const Form = () => {
   });
 
   const [containers, setContainers] = useState([]);
-  const onhandleContainer = (ref) => {
-    let aux = containers;
-    aux.push(ref);
-    setContainers(aux);
-  };
+  const onhandleContainer = useCallback(
+    (ref) => {
+      let aux = containers;
+      aux.push(ref);
+      setContainers(aux);
+    }, [containers]
+  );
 
   const dragulaDecorator = useRef(null);
 
